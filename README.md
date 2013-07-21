@@ -1,9 +1,9 @@
-dynomomite
+dynamomite
 ==========
 
-A "simple" abstraction layer to Amazon's DynamoDB
+A "simple" abstraction layer to Amazon's DynamoDB.
 
-Dynomomite turns DynamoDB into "dict-like" Python objects.
+Dynamomite turns DynamoDB into "dict-like" Python objects. I like DynanamoDB. It's free tier works out well for small projects; plus, you can pay for more. The standard boto dynamo interface is straightforward enough ... but I enjoy things as simple as possible.
 
 Why? ... I dunno, it seemed like a good idea at the time.
 
