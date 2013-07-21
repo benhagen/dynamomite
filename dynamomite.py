@@ -6,9 +6,9 @@ import boto.dynamodb
 from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError
 
 
-class table(object):
+class Table(object):
 
-	def __init__(self, dynamo_connection, table_name, item_class=None):
+	def __init__(self, dynamo_connection, table_name, item_class=Item):
 		self._iter_current_results = None
 		self._iter_current_iter = None
 		self._iter_batch_size = 20
@@ -56,11 +56,13 @@ class table(object):
 	def __iter__(self):
 		return self
 
-	def __len__(self):
-		# Updated every 6 hours ... or so
-		# return int(dynamodb_connection.describe_table(self.table_name)['Table']['ItemCount'])
-		# Or slow/expensive and realtime
-		return int(self.table.scan(count=True).count)
+	def __len__(self, fast=True):
+		if fast:
+			# Updated every 6 hours ... or so
+			return int(self.dynamo.describe_table(self.table_name)['Table']['ItemCount'])
+		else:
+			# Or slow/expensive and realtime
+			return int(self.table.scan(count=True).count)
 
 	def __getitem__(self, key):
 		result = self.get(key)
@@ -80,7 +82,7 @@ class table(object):
 		return item.delete()
 
 
-class item(object):
+class Item(object):
 
 	def __init__(self, table, item=None, hash_key=None):
 		self.table = table
