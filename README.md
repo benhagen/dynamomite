@@ -15,7 +15,7 @@ An example:
 import dynamomite
 
 dynamodb_connection = boto.dynamodb.connect_to_region('us-east-1', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY)
-users = dynamomite.table(dynamodb_connection, "users")
+users = dynamomite.Table(dynamodb_connection, "users")
 
 print users['yodawg@gmail.com']['password']
 
